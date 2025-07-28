@@ -4,7 +4,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "build": "rimraf dist && npx tsc",
+    "start": "npm run build && node dist/index.js",
+    "dev": "npm run build && concurrently \"nodemon  --exec ts-node src/index.ts\" ",
+    "prisma": "prisma",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:reset": "prisma migrate reset --force --skip-seed",
+    "prisma:deploy": "prisma deploy",
+    "prisma:push": "prisma db push",
+    "prisma:format": "prisma format",
+    "prisma:version": "prisma --version",
+    "prisma:studio:open": "prisma studio --browser"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +32,8 @@
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
-    "prisma": "^6.12.0"
+    "prisma": "^6.12.0",
+    "rimraf": "^6.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
