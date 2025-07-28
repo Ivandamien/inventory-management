@@ -8,31 +8,19 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
-  // const dispatch = useAppDispatch();
-  // const isSidebarCollapsed = useAppSelector(
-  //   (state) => state.global.isSidebarCollapsed
-  // );
-  // const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
-
-  // const toggleSidebar = () => {
-  //   dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
-  // };
-
-  // const toggleDarkMode = () => {
-  //   dispatch(setIsDarkMode(!isDarkMode));
-  // };
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+
   const toggleSidebar = () => {
     dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
   };
 
   const toggleDarkMode = () => {
-    // Logic to toggle dark mode
+    dispatch(setIsDarkMode(!isDarkMode));
   };
-  const isDarkMode = false; // Replace with actual state or prop
 
   return (
     <div className="flex justify-between items-center w-full mb-7">
