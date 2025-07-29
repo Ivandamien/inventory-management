@@ -14,25 +14,30 @@ export const getDashboardMetrics = async (
         stockQuantity: "desc",
       },
     });
-
     const salesSummary = await prisma.salesSummary.findMany({
+      take: 5,
       orderBy: {
         date: "desc",
       },
+    });
+    const purchaseSummary = await prisma.purchaseSummary.findMany({
       take: 5,
+      orderBy: {
+        date: "desc",
+      },
     });
     const expenseSummary = await prisma.expenseSummary.findMany({
+      take: 5,
       orderBy: {
         date: "desc",
       },
-      take: 5,
     });
     const expenseByCategorySummaryRaw = await prisma.expenseByCategory.findMany(
       {
+        take: 5,
         orderBy: {
           date: "desc",
         },
-        take: 5,
       }
     );
     const expenseByCategorySummary = expenseByCategorySummaryRaw.map(
@@ -41,14 +46,15 @@ export const getDashboardMetrics = async (
         amount: item.amount.toString(),
       })
     );
-    res.status(200).json({
+
+    res.json({
       popularProducts,
       salesSummary,
+      purchaseSummary,
       expenseSummary,
       expenseByCategorySummary,
     });
   } catch (error) {
-    console.error("Error fetching dashboard metrics:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Error retrieving dashboard metrics" });
   }
 };
